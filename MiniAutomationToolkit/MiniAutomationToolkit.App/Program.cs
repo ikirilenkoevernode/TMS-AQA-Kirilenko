@@ -1,3 +1,12 @@
 ﻿using MiniAutomationToolkit.Core;
+using MiniAutomationToolkit.Core.Models;
 var test = new PrintReference();
 Console.WriteLine(test.Hello());
+Console.WriteLine(test.Discount(ClientType.Vip, 500));
+Console.WriteLine(test.Discount(ClientType.Vip, 2000));
+Console.WriteLine(test.Discount(ClientType.Premium, 800));
+Console.WriteLine(test.Discount(ClientType.Premium, 1000));
+Console.WriteLine(test.Discount(ClientType.Premium, 1500));
+Console.WriteLine(test.Discount(ClientType.Regular, 500));
+Console.WriteLine(test.Discount(ClientType.Regular, 1500));
+Console.WriteLine(test.Discount(ClientType.Regular, 1000));
