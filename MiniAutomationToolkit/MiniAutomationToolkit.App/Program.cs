@@ -54,4 +54,48 @@ var fileNamesWithoutScreenshots = new List<string>
     "session_902.txt"
 };
 Console.WriteLine(FileSearcher.FindFirstScreenshot(fileNames));
-Console.WriteLine(FileSearcher.FindFirstScreenshot(fileNamesWithoutScreenshots));
+try
+{
+    Console.WriteLine(FileSearcher.FindFirstScreenshot(fileNamesWithoutScreenshots));
+}
+catch (FileNotFoundException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+// 4 задание, также поправил ошибку что бы не ломалась консоль из за задания 3
+var alexRecordOne = new UserDto("AlexSmith", "alex@email.com");
+var alexRecordTwo = new UserDto("AlexSmith", "alex@email.com");
+Console.WriteLine(alexRecordOne == alexRecordTwo);
+// alexRecordOne.name = "JohnSmith" Тут можно проверить что будет ошибка если убрать коммент 
+try
+{
+    var alexRecordErrorFirst = new UserDto("", "alex@email.com");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+try
+{
+    var alexRecordErrorSecond = new UserDto("AlexSmith", "");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+try
+{
+    var alexRecordErrorThird = new UserDto("AlexSmith", "alexemail.com");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+try
+{
+    var alexRecordErrorFourth = new UserDto("AlexSmith", "alex@ema il.com");
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine(ex.Message);
+}
