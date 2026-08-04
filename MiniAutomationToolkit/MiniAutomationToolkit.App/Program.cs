@@ -1,6 +1,7 @@
 ﻿using MiniAutomationToolkit.Core;
-using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Helpers;
+using MiniAutomationToolkit.Core.Models;
+using MiniAutomationToolkit.Core.Pages;
 // 1 задание
 var test = new PrintReference();
 Console.WriteLine(test.Hello());
@@ -96,6 +97,32 @@ try
     var alexRecordErrorFourth = new UserDto("AlexSmith", "alex@ema il.com");
 }
 catch (ArgumentException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+// Задание 5. «Базовая страница»
+List<BasePage> pages = new(){ new LoginPage(),new HomePage()};
+foreach (var page in pages)
+{
+    page.Load();
+}
+List<string> urls = new();
+foreach (var page in pages)
+{
+    urls.Add(page.Url);
+}
+try
+{
+    if (urls.Count() != urls.Distinct().Count())
+    {
+        throw new InvalidOperationException("Duplicate page URLs found.");
+    }
+    else
+    {
+        Console.WriteLine("All page URLs are unique.");
+    }
+}
+catch (InvalidOperationException ex)
 {
     Console.WriteLine(ex.Message);
 }
