@@ -4,6 +4,8 @@ using MiniAutomationToolkit.Core.Extensions;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
+using MiniAutomationToolkit.Core.Simulations;
+using System.Diagnostics;
 // 1 задание
 var test = new PrintReference();
 Console.WriteLine(test.Hello());
@@ -162,3 +164,9 @@ foreach (string? input in inputsTaskSeven)
 {
     Console.WriteLine($"'{input}' -> {input.HasHttpScheme()}");
 }
+// Задание 8 
+var simulator = new LongOperationSimulator();
+var stopwatch = Stopwatch.StartNew();
+string result = await simulator.LongOperationAsync();
+stopwatch.Stop();
+Console.WriteLine($"Answer is {result} Duration: {stopwatch.ElapsedMilliseconds} ms");
