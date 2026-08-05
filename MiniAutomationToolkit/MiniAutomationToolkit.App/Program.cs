@@ -1,5 +1,6 @@
 ﻿using MiniAutomationToolkit.Core;
 using MiniAutomationToolkit.Core.Configuration;
+using MiniAutomationToolkit.Core.Extensions;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
@@ -147,4 +148,17 @@ catch (KeyNotFoundException ex)
 {
     Console.WriteLine(ex.Message);
 }
+//Задание 7
+string?[] inputsTaskSeven =
+{
+    "https://google.com",
+    "http://example.org",
+    "ftp://files.example.com",
+    null,
+    "HTTPS://SITE.EXAMPLE.COM"
+};
 
+foreach (string? input in inputsTaskSeven)
+{
+    Console.WriteLine($"'{input}' -> {input.HasHttpScheme()}");
+}
