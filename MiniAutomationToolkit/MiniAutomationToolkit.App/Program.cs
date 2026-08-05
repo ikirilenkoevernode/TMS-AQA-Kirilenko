@@ -4,12 +4,15 @@ using MiniAutomationToolkit.Core.Extensions;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
+using MiniAutomationToolkit.Core.Services;
 using MiniAutomationToolkit.Core.Simulations;
 using System.Diagnostics;
 // 1 задание
+Console.WriteLine("Task 1");
 var test = new PrintReference();
 Console.WriteLine(test.Hello());
 // 2 задание
+Console.WriteLine("Task 2");
 Console.WriteLine(test.Discount(ClientType.Vip, 500));
 Console.WriteLine(test.Discount(ClientType.Vip, 2000));
 Console.WriteLine(test.Discount(ClientType.Premium, 800));
@@ -19,6 +22,7 @@ Console.WriteLine(test.Discount(ClientType.Regular, 500));
 Console.WriteLine(test.Discount(ClientType.Regular, 1500));
 Console.WriteLine(test.Discount(ClientType.Regular, 1000));
 // 3 задание
+Console.WriteLine("Task 3");
 var fileNames = new List<string>
 {
     "debug_742.txt",
@@ -68,6 +72,7 @@ catch (FileNotFoundException ex)
     Console.WriteLine(ex.Message);
 }
 // 4 задание, также поправил ошибку что бы не ломалась консоль из за задания 3
+Console.WriteLine("Task 4");
 var alexRecordOne = new UserDto("AlexSmith", "alex@email.com");
 var alexRecordTwo = new UserDto("AlexSmith", "alex@email.com");
 Console.WriteLine(alexRecordOne == alexRecordTwo);
@@ -105,6 +110,7 @@ catch (ArgumentException ex)
     Console.WriteLine(ex.Message);
 }
 // Задание 5. «Базовая страница»
+Console.WriteLine("Task 5");
 List<BasePage> pages = new(){ new LoginPage(),new HomePage()};
 foreach (var page in pages)
 {
@@ -131,6 +137,7 @@ catch (InvalidOperationException ex)
     Console.WriteLine(ex.Message);
 }
 //Задание 6
+Console.WriteLine("Task 6");
 var configPath = "data/appsettings.txt";
 AppConfig config = new AppConfig(configPath);
 
@@ -151,6 +158,7 @@ catch (KeyNotFoundException ex)
     Console.WriteLine(ex.Message);
 }
 //Задание 7
+Console.WriteLine("Task 7");
 string?[] inputsTaskSeven =
 {
     "https://google.com",
@@ -165,8 +173,22 @@ foreach (string? input in inputsTaskSeven)
     Console.WriteLine($"'{input}' -> {input.HasHttpScheme()}");
 }
 // Задание 8 
+Console.WriteLine("Task 8");
 var simulator = new LongOperationSimulator();
 var stopwatch = Stopwatch.StartNew();
 string result = await simulator.LongOperationAsync();
 stopwatch.Stop();
-Console.WriteLine($"Answer is {result} Duration: {stopwatch.ElapsedMilliseconds} ms");
+Console.WriteLine($"Answer from funcion is '{result}' Duration: {stopwatch.ElapsedMilliseconds} ms");
+//Задание 9
+Console.WriteLine("Task 9");
+var logger = new ErrorLogger();
+string inputPath = "data/input.txt";
+string missingPath = "data/missing.txt";
+string logPath = "data/errors.log";
+string? content = logger.TryReadFile(inputPath, logPath);
+if (content != null)
+{
+    Console.WriteLine(content);
+}
+string? missingContent = logger.TryReadFile(missingPath, logPath);
+Console.WriteLine(File.ReadAllText(logPath));
