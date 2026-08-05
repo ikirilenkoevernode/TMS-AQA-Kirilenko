@@ -6,6 +6,7 @@ using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
 using MiniAutomationToolkit.Core.Services;
 using MiniAutomationToolkit.Core.Simulations;
+using MiniAutomationToolkit.Core.Validation;
 using System.Diagnostics;
 // 1 задание
 Console.WriteLine("Task 1");
@@ -192,3 +193,34 @@ if (content != null)
 }
 string? missingContent = logger.TryReadFile(missingPath, logPath);
 Console.WriteLine(File.ReadAllText(logPath));
+// Задание 10
+var number1 = 5;
+var number2 = -5;
+var number3 = 0;
+try
+{
+    Guard.EnsurePositive(number1);
+    Console.WriteLine($"{number1} is valid");
+}
+catch (ValidationException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+try
+{
+    Guard.EnsurePositive(number2);
+    Console.WriteLine($"{number2} is valid");
+}
+catch (ValidationException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+try
+{
+    Guard.EnsurePositive(0);
+    Console.WriteLine($"{number3} is valid");
+}
+catch (ValidationException ex)
+{
+    Console.WriteLine(ex.Message);
+}
