@@ -1,4 +1,5 @@
 ﻿using MiniAutomationToolkit.Core;
+using MiniAutomationToolkit.Core.Configuration;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
@@ -126,3 +127,24 @@ catch (InvalidOperationException ex)
 {
     Console.WriteLine(ex.Message);
 }
+//Задание 6
+var configPath = "data/appsettings.txt";
+AppConfig config = new AppConfig(configPath);
+
+var baseUrl = config.GetSetting<string>("baseUrl");
+var  timeout = config.GetSetting<int>("timeout");
+var headless = config.GetSetting<bool>("headless");
+var retryCount = config.GetSetting<int>("retryCount");
+Console.WriteLine($"base URL: {baseUrl}");
+Console.WriteLine($"timeout: {timeout}");
+Console.WriteLine($"headless: {headless}");
+Console.WriteLine($"retry Count: {retryCount}");
+try
+{
+    int wrongKey = config.GetSetting<int>("wrongKey");
+}
+catch (KeyNotFoundException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
