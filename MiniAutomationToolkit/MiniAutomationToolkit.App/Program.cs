@@ -4,6 +4,7 @@ using MiniAutomationToolkit.Core.Extensions;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
+using MiniAutomationToolkit.Core.Repositories;
 using MiniAutomationToolkit.Core.Services;
 using MiniAutomationToolkit.Core.Simulations;
 using MiniAutomationToolkit.Core.Validation;
@@ -194,6 +195,7 @@ if (content != null)
 string? missingContent = logger.TryReadFile(missingPath, logPath);
 Console.WriteLine(File.ReadAllText(logPath));
 // Задание 10
+Console.WriteLine("Task 9");
 var number1 = 5;
 var number2 = -5;
 var number3 = 0;
@@ -223,4 +225,39 @@ try
 catch (ValidationException ex)
 {
     Console.WriteLine(ex.Message);
+}
+//Задание 10
+Console.WriteLine("Task 10");
+var products = ProductRepository.LoadFromCsv(@"data\products.csv");
+
+Console.WriteLine("Food cheaper and not equal to 1");
+
+var resultTask10 = ProductRepository.GetAffordableProducts(products,ProductCategory.Food, 10);
+
+if (resultTask10.Count == 0)
+{
+    Console.WriteLine("No products found");
+}
+else
+{
+    foreach (var product in resultTask10)
+    {
+        Console.WriteLine(product);
+    }
+}
+
+Console.WriteLine("Food cheaper and not equal to 1");
+
+resultTask10 = ProductRepository.GetAffordableProducts(products,ProductCategory.Food,1);
+
+if (resultTask10.Count == 0)
+{
+    Console.WriteLine("No products found");
+}
+else
+{
+    foreach (var product in resultTask10)
+    {
+        Console.WriteLine(product);
+    }
 }
